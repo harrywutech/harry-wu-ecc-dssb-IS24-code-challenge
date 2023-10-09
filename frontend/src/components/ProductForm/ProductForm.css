@@ -1,0 +1,41 @@
+.form-wrapper {
+    width: 100%;
+    background: #fff;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  .form label {
+    margin-bottom: 15px;
+  }
+  
+  .form input,
+  .form select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+  }
+  
+  .form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .success-message {
+    display: flex;
+    justify-content: center;
+    color: red
+  }
