@@ -89,7 +89,23 @@ const updateProduct = (req, res, next) => {
   res.status(200).json({ product: updatedProduct });
 };
 
+// DELETE PRODUCT
+const deleteProduct = (req, res, next) => {
+  const productId = req.params.productId;
+
+  const productIndex = PRODUCTS.findIndex(p => p.productId === productId);
+
+  if (productIndex === -1) {
+    throw new HttpError("Could not find a product for the provided id.", 404);
+  }
+
+  PRODUCTS.splice(productIndex, 1);
+
+  res.status(200).json({ message: 'Product deleted successfully!' });
+};
+
 exports.getProducts = getProducts;
 exports.getProductById = getProductById;
 exports.createProduct = createProduct;
 exports.updateProduct = updateProduct;
+exports.deleteProduct = deleteProduct;
