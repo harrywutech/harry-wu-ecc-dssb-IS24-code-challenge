@@ -5,7 +5,7 @@ const UseProductsPage = () => {
   const [error, setError] = useState(null);
 
   const [products, setProducts] = useState([]);
-  console.log(products, "products");
+ 
   //get all products
   useEffect(() => {
     const sendRequest = async () => {

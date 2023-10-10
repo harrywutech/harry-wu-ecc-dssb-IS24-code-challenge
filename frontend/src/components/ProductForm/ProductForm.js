@@ -34,33 +34,48 @@ const ProductForm = (props) => {
           <label>
             Product Id:
             {updateProductId != null ? (
-              <Input field="product_id" disabled />
+              <Input field="productId" disabled />
             ) : (
-              <NumberInput field="product_id" />
+              <NumberInput field="productId" />
             )}
           </label>
           <label>
             Product Name:
-            <Input field="product_name" />
+            <Input field="productName" />
           </label>
           <label>
-            Product Description:
-            <TextArea field="product_description" />
+            Scrum Master:
+            <Input field="scrumMasterName" />
           </label>
           <label>
-            Product Colour:
-            <Input field="product_colour" />
+          Product Owner:
+            <Input field="productOwnerName" />
           </label>
           <label>
-            Product Size:
-            <Select field="product_size">
+            Developers:
+            <Input field="developer1" placeholder="Developer 1" />
+            <Input field="developer2" placeholder="Developer 2" />
+            <Input field="developer3" placeholder="Developer 3" />
+            <Input field="developer4" placeholder="Developer 4" />
+            <Input field="developer5" placeholder="Developer 5" />
+          </label>
+          <label>
+            Start Date:
+            <Input field="startDate" />
+          </label>
+          <label>
+            Methodology:
+            <Select field="methodology">
               <option value="" disabled>
                 Select...
               </option>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
+              <option value="Agile">Agile</option>
+              <option value="Waterfall">Waterfall</option>
             </Select>
+          </label>
+          <label>
+            Location:
+            <Input field="location" />
           </label>
           <div>
             <Button type="submit">{updateProductId ? "Update" : "Save"}</Button>

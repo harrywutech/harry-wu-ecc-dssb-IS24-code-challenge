@@ -15,11 +15,18 @@ const UseProductForm = (props) => {
   const [isLoading, setIsLoading] = useState("");
   const [countdown, setCountdown] = useState(0);
   const [initialValues, setInitialValues] = useState({
-    product_id: "",
-    product_name: "",
-    product_description: "",
-    product_colour: "",
-    product_size: "",
+    productId: "",
+    productName: "",
+    scrumMasterName: "",
+    productOwnerName: "",
+    developer1: '',
+    developer2: '',
+    developer3: '',
+    developer4: '',
+    developer5: '',
+    startDate: '',
+    methodology: '',
+    location: ''
   });
 
   const history = useHistory();
@@ -45,11 +52,18 @@ const UseProductForm = (props) => {
         }
 
         setInitialValues({
-          product_id: responseData.product.product_id,
-          product_name: responseData.product.product_name,
-          product_description: responseData.product.product_description,
-          product_colour: responseData.product.product_colour,
-          product_size: responseData.product.product_size,
+          productId: responseData.product.productId,
+          productName: responseData.product.productName,
+          scrumMasterName: responseData.product.scrumMasterName,
+          productOwnerName: responseData.product.productOwnerName,
+          developer1: responseData.product.developers[0] || '',
+          developer2: responseData.product.developers[1] || '',
+          developer3: responseData.product.developers[2] || '',
+          developer4: responseData.product.developers[3] || '',
+          developer5: responseData.product.developers[4] || '',
+          startDate: responseData.product.startDate,
+          methodology: responseData.product.methodology,
+          location: responseData.product.location,
         });
         setIsLoading(false);
       } catch (err) {
@@ -72,6 +86,13 @@ const UseProductForm = (props) => {
 
       products = {
         ...products,
+        developers: [
+          products.developer1,
+          products.developer2,
+          products.developer3,
+          products.developer4,
+          products.developer5,
+        ].filter(Boolean),
       };
 
       try {
@@ -122,8 +143,14 @@ const UseProductForm = (props) => {
 
       products = {
         ...products,
+        developers: [
+          products.developer1,
+          products.developer2,
+          products.developer3,
+          products.developer4,
+          products.developer5,
+        ].filter(Boolean),
       };
-
       try {
         const response = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}/api/products/${updateProductId}`,
@@ -136,7 +163,7 @@ const UseProductForm = (props) => {
           }
         );
         const data = await response.json();
-
+      
         if (!response.ok) {
           setErrorMessage(data.message);
           setAddFormState(null);

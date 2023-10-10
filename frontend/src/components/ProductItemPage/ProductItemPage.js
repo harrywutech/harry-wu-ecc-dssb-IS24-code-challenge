@@ -31,7 +31,7 @@ const ProductItemPage = () => {
   if (!productItem) {
     return (
       <div className="center">
-        <Alert Alert variant="danger">
+        <Alert variant="danger">
           <h2>No product found.</h2>
           <Link to="/">
             <Button variant="danger">
@@ -61,26 +61,38 @@ const ProductItemPage = () => {
         <div className="d-flex justify-content-center">
           <Card style={{ width: "18rem" }}>
             <Card.Body>
-              <Card.Title>{productItem.product_name}</Card.Title>
+              <Card.Title>{productItem.productName}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-                {"Product ID: " + productItem.product_id}
+                {"Product ID: " + productItem.productId}
               </Card.Subtitle>
-              <Card.Text>
+              <Card.Body>
                 <ListGroup className="list-group-flush">
                   <ListGroupItem>
-                    <b>{"Product Colour: "}</b>
-                    {productItem.product_colour}
+                    <b>{"Scrum Master: "}</b>
+                    {productItem.scrumMasterName}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>{"Product Description: "}</b>
-                    {productItem.product_description}
+                    <b>{"Product Owner: "}</b>
+                    {productItem.productOwnerName}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>{"Product Size: "}</b>
-                    {productItem.product_size}
+                    <b>{"Developer Names: "}</b>
+                    {productItem && productItem.developers && productItem.developers.join(', ')}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <b>{"Start Date: "}</b>
+                    {productItem.startDate}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <b>{"Methodology: "}</b>
+                    {productItem.methodology}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <b>{"Location: "}</b>
+                    <a href={productItem.location} target="_blank">{productItem.location}</a>
                   </ListGroupItem>
                 </ListGroup>
-              </Card.Text>
+              </Card.Body>
               <div
                 style={{
                   display: "flex",
@@ -89,14 +101,14 @@ const ProductItemPage = () => {
                 }}
               >
                 <Link
-                  to={`/products/update/${productItem.product_id}`}
+                  to={`/products/update/${productItem.productId}`}
                   style={{ marginRight: "10px" }}
                 >
                   <Button disabled={isLoading || countdown}>{"Update"}</Button>
                 </Link>
                 <Button
                   variant="primary"
-                  onClick={() => handleDelete(productItem.product_id)}
+                  onClick={() => handleDelete(productItem.productId)}
                   disabled={isLoading || countdown}
                 >
                   {isLoading ? "Deleting..." : "Delete"}

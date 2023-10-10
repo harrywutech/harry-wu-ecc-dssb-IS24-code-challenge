@@ -46,7 +46,7 @@ const UseProductItem = (props) => {
           method: "DELETE",
         }
       );
-  
+    
       if (!response.ok) {
         throw new Error("Failed to delete the product.");
       }

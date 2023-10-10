@@ -36,10 +36,10 @@ const ProductsList = (props) => {
   if (!items) {
     return null;
   }
-
+ 
   return (
     <div>
-      <h2>View products</h2>
+      <h2>View products: Total {items.length} Items </h2>
       {successDel && (
         <Modal show={successDel}>
           <Alert variant="warning">
@@ -55,8 +55,14 @@ const ProductsList = (props) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Product ID</th>
+            <th>Product Number</th>
             <th>Product Name</th>
+            <th>Scrum Master</th>
+            <th>Product Owner</th>
+            <th>Developer Names</th>
+            <th>Start Date</th>
+            <th>Methodology</th>
+            <th>Location</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -65,6 +71,12 @@ const ProductsList = (props) => {
             <tr key={product.productId}>
               <td>{product.productId}</td>
               <td>{product.productName}</td>
+              <td>{product.scrumMasterName}</td>
+              <td>{product.productOwnerName}</td>
+              <td>{product && product.developers && product.developers.join(', ')}</td>
+              <td>{product.startDate}</td>
+              <td>{product.methodology}</td>
+              <td><a href={product.location} target="_blank">{product.location}</a></td>
               <td>
                 <div
                   style={{
