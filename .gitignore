@@ -4,3 +4,6 @@ frontend/node_modules
 # Ignore cache files
 backend/UsersharryAppDataLocalnpm-cache
 frontend/UsersharryAppDataLocalnpm-cache
+
+# Ignore cache files
+backend/build
