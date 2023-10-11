@@ -7,26 +7,24 @@ const UseProductForm = (props) => {
     updateFormState,
     updateProductId,
     setAddFormState,
-    setUpdateFormState,
   } = props;
 
   const [successAdd, setSuccessAdd] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState("");
-  const [countdown, setCountdown] = useState(0);
   const [initialValues, setInitialValues] = useState({
     productId: "",
     productName: "",
     scrumMasterName: "",
     productOwnerName: "",
-    developer1: '',
-    developer2: '',
-    developer3: '',
-    developer4: '',
-    developer5: '',
-    startDate: '',
-    methodology: '',
-    location: ''
+    developer1: "",
+    developer2: "",
+    developer3: "",
+    developer4: "",
+    developer5: "",
+    startDate: "",
+    methodology: "",
+    location: "",
   });
 
   const history = useHistory();
@@ -56,11 +54,11 @@ const UseProductForm = (props) => {
           productName: responseData.product.productName,
           scrumMasterName: responseData.product.scrumMasterName,
           productOwnerName: responseData.product.productOwnerName,
-          developer1: responseData.product.developers[0] || '',
-          developer2: responseData.product.developers[1] || '',
-          developer3: responseData.product.developers[2] || '',
-          developer4: responseData.product.developers[3] || '',
-          developer5: responseData.product.developers[4] || '',
+          developer1: responseData.product.developers[0] || "",
+          developer2: responseData.product.developers[1] || "",
+          developer3: responseData.product.developers[2] || "",
+          developer4: responseData.product.developers[3] || "",
+          developer5: responseData.product.developers[4] || "",
           startDate: responseData.product.startDate,
           methodology: responseData.product.methodology,
           location: responseData.product.location,
@@ -96,13 +94,16 @@ const UseProductForm = (props) => {
       };
 
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(products),
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/products`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(products),
+          }
+        );
 
         const data = await response.json();
 
@@ -111,11 +112,9 @@ const UseProductForm = (props) => {
           setAddFormState(null);
           setIsLoading(false);
         } else {
-          setCountdown(5);
           setSuccessAdd(true);
-          setTimeout(() => {
-            history.push("/");
-          }, 5000);
+
+          history.push("/");
         }
 
         return data;
@@ -163,17 +162,15 @@ const UseProductForm = (props) => {
           }
         );
         const data = await response.json();
-      
+
         if (!response.ok) {
           setErrorMessage(data.message);
           setAddFormState(null);
           setIsLoading(false);
         } else {
-          setCountdown(5);
           setSuccessAdd(true);
-          setTimeout(() => {
-            history.push("/");
-          }, 5000);
+
+          history.push("/");
         }
 
         return data;
@@ -188,22 +185,11 @@ const UseProductForm = (props) => {
     updateProduct();
   }, [updateFormState]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (countdown > 0) {
-        setCountdown((prevCountdown) => prevCountdown - 1);
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [countdown]);
-
   return {
     isLoading,
     errorMessage,
     successAdd,
     handleClose,
-    countdown,
     initialValues,
   };
 };

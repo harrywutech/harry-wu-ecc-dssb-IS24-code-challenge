@@ -4,12 +4,22 @@ import "./ProductList.css";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import UseProductItem from "../ProductItemPage/hooks/UseProductItem";
-import { Button, Alert, Modal } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 
 const ProductsList = (props) => {
   const { items } = props;
 
   const history = useHistory();
+
+  const [selectProductId, setSelectProductId] = useState(null);
+
+  const { successDel, countdown, handleDelete } = UseProductItem({
+    productId: selectProductId,
+  });
+
+  if (successDel) {
+    history.go(0);
+  }
 
   if (!items) {
     return (
@@ -21,37 +31,9 @@ const ProductsList = (props) => {
     );
   }
 
-  const [selectProductId, setSelectProductId] = useState(null);
-
-  const { successDel, countdown, handleDelete } = UseProductItem({
-    productId: selectProductId,
-  });
-
-  if (successDel) {
-    setTimeout(() => {
-      history.go(0);
-    }, 5000);
-  }
-
-  if (!items) {
-    return null;
-  }
- 
   return (
     <div>
       <h2>View products: Total {items.length} Items </h2>
-      {successDel && (
-        <Modal show={successDel}>
-          <Alert variant="warning">
-            <Modal.Header>
-              <Modal.Title>{`Successfully Deleted Product Id: ${selectProductId}`}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>{`You are returning to the product list page in ${countdown} seconds`}</p>
-            </Modal.Body>
-          </Alert>
-        </Modal>
-      )}
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -73,10 +55,16 @@ const ProductsList = (props) => {
               <td>{product.productName}</td>
               <td>{product.scrumMasterName}</td>
               <td>{product.productOwnerName}</td>
-              <td>{product && product.developers && product.developers.join(', ')}</td>
+              <td>
+                {product && product.developers && product.developers.join(", ")}
+              </td>
               <td>{product.startDate}</td>
               <td>{product.methodology}</td>
-              <td><a href={product.location} target="_blank">{product.location}</a></td>
+              <td>
+                <a href={product.location} target="_blank">
+                  {product.location}
+                </a>
+              </td>
               <td>
                 <div
                   style={{

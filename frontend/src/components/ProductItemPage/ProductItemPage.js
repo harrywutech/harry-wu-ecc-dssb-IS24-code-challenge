@@ -15,7 +15,7 @@ import {
 const ProductItemPage = () => {
   const { productId } = useParams();
 
-  const { productItem, isLoading, handleDelete, successDel, countdown } =
+  const { productItem, isLoading, handleDelete, successDel } =
     UseProductItem({
       productId,
     });
@@ -45,18 +45,6 @@ const ProductItemPage = () => {
 
   return (
     <React.Fragment>
-      {successDel && (
-        <Modal show={successDel}>
-          <Alert variant="warning">
-            <Modal.Header>
-              <Modal.Title>{`Successfully Deleted ${productItem.product_name}`}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>{`You are returning to the product list page in ${countdown} seconds`}</p>
-            </Modal.Body>
-          </Alert>
-        </Modal>
-      )}
       {!successDel && (
         <div className="d-flex justify-content-center">
           <Card style={{ width: "18rem" }}>
@@ -104,12 +92,12 @@ const ProductItemPage = () => {
                   to={`/products/update/${productItem.productId}`}
                   style={{ marginRight: "10px" }}
                 >
-                  <Button disabled={isLoading || countdown}>{"Update"}</Button>
+                  <Button disabled={isLoading}>{"Update"}</Button>
                 </Link>
                 <Button
                   variant="primary"
                   onClick={() => handleDelete(productItem.productId)}
-                  disabled={isLoading || countdown}
+                  disabled={isLoading}
                 >
                   {isLoading ? "Deleting..." : "Delete"}
                 </Button>

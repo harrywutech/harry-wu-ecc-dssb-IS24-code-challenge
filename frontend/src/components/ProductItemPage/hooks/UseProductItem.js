@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 
 const UseProductItem = (props) => {
   const { productId } = props;
-  
+
   const [successDel, setSuccessDel] = useState(false);
-  const [countdown, setCountdown] = useState(0);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
@@ -16,6 +16,7 @@ const UseProductItem = (props) => {
   useEffect(() => {
     setIsLoading(true);
     const sendRequest = async () => {
+      if(!productId) return null;
       try {
         const response = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}`
@@ -37,7 +38,9 @@ const UseProductItem = (props) => {
     sendRequest();
   }, [productId]);
 
+  //Delete product
   const handleDelete = async (productId) => {
+    if(!productId) return null;
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -46,33 +49,21 @@ const UseProductItem = (props) => {
           method: "DELETE",
         }
       );
-    
+
       if (!response.ok) {
         throw new Error("Failed to delete the product.");
       }
-  
+
       setIsLoading(false);
       setSuccessDel("Product deleted successfully.");
-      setCountdown(5);
-      setTimeout(() => {
-        history.push("/");
-      }, 5000);
+
+      history.push("/");
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (countdown > 0) {
-        setCountdown((prevCountdown) => prevCountdown - 1);
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [countdown]);
 
   return {
     productItem,
@@ -81,7 +72,6 @@ const UseProductItem = (props) => {
     error,
     setSuccessDel,
     handleDelete,
-    countdown,
   };
 };
 
