@@ -28,7 +28,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000",
+        url: "http://localhost:3000",
       },
     ],
   },
@@ -37,6 +37,8 @@ const options = {
 
 const specs = swaggerJsDoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
+app.use(express.static(path.join(__dirname, "/build")));
 
 app.use("/api/products", productsRoutes);
 
@@ -57,7 +59,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
