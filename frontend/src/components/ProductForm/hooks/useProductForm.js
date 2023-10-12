@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const UseProductForm = (props) => {
-  const {
-    addFormState,
-    updateFormState,
-    updateProductId,
-    setAddFormState,
-  } = props;
+  const { addFormState, updateFormState, updateProductId, setAddFormState } =
+    props;
 
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
   const [successAdd, setSuccessAdd] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState("");
@@ -33,6 +31,44 @@ const UseProductForm = (props) => {
     setErrorMessage(null);
     setSuccessAdd(false);
   };
+
+  function generateNextProductId(products) {
+    const productIds = Object.values(products).map((product) =>
+      parseInt(product.productId, 10)
+    );
+
+    const maxId = Math.max(...productIds);
+
+    return (maxId + 1).toString();
+  }
+
+  //get all products
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/products`
+        );
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setProducts(responseData.products);
+        const nextProductId = generateNextProductId(responseData.products);
+        setInitialValues({
+          productId: nextProductId,
+        });
+        setIsLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setIsLoading(false);
+      }
+    };
+    sendRequest();
+  }, []);
 
   //get product by id
   useEffect(() => {

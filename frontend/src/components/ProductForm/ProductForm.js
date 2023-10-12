@@ -11,14 +11,19 @@ const ProductForm = (props) => {
   const [addFormState, setAddFormState] = useState(null);
   const [updateFormState, setUpdateFormState] = useState(null);
 
-  const { errorMessage, successAdd, handleClose, countdown, initialValues } =
-    useProductForm({
-      addFormState,
-      updateFormState,
-      updateProductId,
-      setAddFormState,
-      setUpdateFormState,
-    });
+  const {
+    errorMessage,
+    successAdd,
+    handleClose,
+    countdown,
+    initialValues
+  } = useProductForm({
+    addFormState,
+    updateFormState,
+    updateProductId,
+    setAddFormState,
+    setUpdateFormState,
+  });
 
   const renderForm = (
     <div className="form-wrapper">
@@ -33,27 +38,23 @@ const ProductForm = (props) => {
         >
           <label>
             Product Id:
-            {updateProductId != null ? (
-              <Input field="productId" disabled />
-            ) : (
-              <NumberInput field="productId" />
-            )}
+            <Input field="productId" disabled />
           </label>
           <label>
             Product Name:
-            <Input field="productName" />
+            <Input field="productName" required />
           </label>
           <label>
             Scrum Master:
-            <Input field="scrumMasterName" />
+            <Input field="scrumMasterName" required />
           </label>
           <label>
-          Product Owner:
-            <Input field="productOwnerName" />
+            Product Owner:
+            <Input field="productOwnerName" required />
           </label>
           <label>
             Developers:
-            <Input field="developer1" placeholder="Developer 1" />
+            <Input field="developer1" placeholder="Developer 1" required />
             <Input field="developer2" placeholder="Developer 2" />
             <Input field="developer3" placeholder="Developer 3" />
             <Input field="developer4" placeholder="Developer 4" />
@@ -61,11 +62,11 @@ const ProductForm = (props) => {
           </label>
           <label>
             Start Date:
-            <Input field="startDate" />
+            <Input field="startDate" required />
           </label>
           <label>
             Methodology:
-            <Select field="methodology">
+            <Select field="methodology" required>
               <option value="" disabled>
                 Select...
               </option>
@@ -75,10 +76,10 @@ const ProductForm = (props) => {
           </label>
           <label>
             Location:
-            <Input field="location" />
+            <Input field="location" required />
           </label>
           <div>
-            <Button type="submit">{updateProductId ? "Update" : "Save"}</Button>
+            <Button type="submit">{"Save"}</Button>
           </div>
         </Form>
       </div>

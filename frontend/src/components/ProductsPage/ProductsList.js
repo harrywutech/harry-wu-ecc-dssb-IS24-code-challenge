@@ -122,7 +122,7 @@ const ProductsList = (props) => {
                       to={`/products/update/${product.productId}`}
                       style={{ marginRight: "5px" }}
                     >
-                      <Button disabled={countdown}>{"Update"}</Button>
+                      <Button disabled={countdown}>{"Edit"}</Button>
                     </Link>
                     <Button
                       onClick={() => {
