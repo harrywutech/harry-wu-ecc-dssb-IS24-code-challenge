@@ -1,0 +1,16 @@
+.search-bar {
+    display: flex;
+}
+
+.search-input {
+    padding: 10px;
+}
+
+.product-list-wrapper {
+    padding: 8px;
+}
+
+.product-list-container {
+    margin-left: 40px;
+    margin-right: 40px;
+}
