@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Form, Input, Select } from "informed";
-import { Button, Alert, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import useProductForm from "./hooks/useProductForm";
+import { useRouteMatch } from 'react-router-dom';
 import "./ProductForm.css";
 
 const ProductForm = (props) => {
   const { updateProductId } = props;
-
+  const match = useRouteMatch('/products/update/:id');
   const [addFormState, setAddFormState] = useState(null);
   const [updateFormState, setUpdateFormState] = useState(null);
 
@@ -20,14 +21,14 @@ const ProductForm = (props) => {
     setAddFormState,
     setUpdateFormState,
   });
-  console.log(updateProductId, "updateProductId")
+
   const renderForm = (
     <div className="form-wrapper">
       {errorMessage}
       <div className="form">
         <Form
           onSubmit={(formState) =>
-            updateProductId
+            updateProductId && match
               ? setUpdateFormState(formState)
               : setAddFormState(formState)
           }
