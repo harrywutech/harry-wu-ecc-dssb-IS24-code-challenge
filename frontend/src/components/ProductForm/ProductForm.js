@@ -12,9 +12,6 @@ const ProductForm = (props) => {
 
   const {
     errorMessage,
-    successAdd,
-    handleClose,
-    countdown,
     initialValues
   } = useProductForm({
     addFormState,
@@ -23,9 +20,10 @@ const ProductForm = (props) => {
     setAddFormState,
     setUpdateFormState,
   });
-
+  console.log(updateProductId, "updateProductId")
   const renderForm = (
     <div className="form-wrapper">
+      {errorMessage}
       <div className="form">
         <Form
           onSubmit={(formState) =>
@@ -87,29 +85,6 @@ const ProductForm = (props) => {
 
   return (
     <React.Fragment>
-      {(errorMessage || successAdd) && (
-        <Modal show={errorMessage || successAdd} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>{errorMessage ? "Error" : "Success"}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Alert variant={errorMessage ? "danger" : "success"}>
-              {errorMessage ||
-                (successAdd && (
-                  <p>{`You are returning to the product list page in ${countdown} seconds`}</p>
-                ))}
-            </Alert>
-          </Modal.Body>
-          {errorMessage && (
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                {"Close"}
-              </Button>
-            </Modal.Footer>
-          )}
-        </Modal>
-      )}
-
       {renderForm}
     </React.Fragment>
   );

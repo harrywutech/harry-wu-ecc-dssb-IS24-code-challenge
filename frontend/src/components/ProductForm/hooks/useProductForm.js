@@ -5,8 +5,6 @@ const UseProductForm = (props) => {
   const { addFormState, updateFormState, updateProductId, setAddFormState } =
     props;
 
-  const [error, setError] = useState(null);
-  const [successAdd, setSuccessAdd] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState("");
   const [initialValues, setInitialValues] = useState({
@@ -25,11 +23,6 @@ const UseProductForm = (props) => {
   });
 
   const history = useHistory();
-
-  const handleClose = () => {
-    setErrorMessage(null);
-    setSuccessAdd(false);
-  };
 
   function generateNextProductId(products) {
     const productIds = Object.values(products).map((product) =>
@@ -61,7 +54,7 @@ const UseProductForm = (props) => {
         });
         setIsLoading(false);
       } catch (err) {
-        setError(err.message);
+        setErrorMessage(err.message);
         setIsLoading(false);
       }
     };
@@ -113,7 +106,6 @@ const UseProductForm = (props) => {
 
     const addProduct = async () => {
       let products = addFormState && addFormState.values;
-      handleClose();
       if (!products) return null;
 
       products = {
@@ -146,8 +138,6 @@ const UseProductForm = (props) => {
           setAddFormState(null);
           setIsLoading(false);
         } else {
-          setSuccessAdd(true);
-
           history.push("/");
         }
 
@@ -161,7 +151,7 @@ const UseProductForm = (props) => {
     };
 
     addProduct();
-  }, [addFormState, setAddFormState, history]);
+  }, [addFormState]);
 
   //update product
   useEffect(() => {
@@ -202,8 +192,6 @@ const UseProductForm = (props) => {
           setAddFormState(null);
           setIsLoading(false);
         } else {
-          setSuccessAdd(true);
-
           history.push("/");
         }
 
@@ -217,15 +205,12 @@ const UseProductForm = (props) => {
     };
 
     updateProduct();
-  }, [updateFormState, setAddFormState, history, updateProductId]);
+  }, [updateFormState]);
 
   return {
     isLoading,
     errorMessage,
-    successAdd,
-    handleClose,
     initialValues,
-    error
   };
 };
 
