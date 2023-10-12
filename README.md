@@ -41,3 +41,4 @@ please visit http://localhost:3000/api/api-docs
 # Bugs
 
 1. there is an issue with the edit/add product page due to shared component with inform library 
+2. there is an route issue with the /products/new from the docker server, but http://localhost:3333 is running ok 
