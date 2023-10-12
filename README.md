@@ -37,3 +37,7 @@ please visit http://localhost:3000/api/api-docs
 
 # Release version 0.0.1
 1. Basic Products CRUD app
+
+# Bugs
+
+1. there is an issue with the edit/add product page due to shared component with inform library 
