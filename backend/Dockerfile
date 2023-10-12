@@ -1,6 +1,6 @@
 #  Dockerfile for Node Express Backend
 
-FROM node:20
+FROM node:14.21.3
 
 # Create App Directory
 RUN mkdir -p /usr/src/app

@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   backend:
     build:
@@ -17,6 +15,7 @@ services:
       - NODE_ENV=development
     networks:
       - app-network
+
   frontend:
     build:
       context: ./frontend
@@ -31,6 +30,8 @@ services:
       - backend
     ports:
       - "3333:3333"
+    environment:
+      - PORT=3333
     networks:
       - app-network
 
