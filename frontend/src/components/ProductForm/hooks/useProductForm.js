@@ -5,7 +5,6 @@ const UseProductForm = (props) => {
   const { addFormState, updateFormState, updateProductId, setAddFormState } =
     props;
 
-  const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [successAdd, setSuccessAdd] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -56,7 +55,6 @@ const UseProductForm = (props) => {
           throw new Error(responseData.message);
         }
 
-        setProducts(responseData.products);
         const nextProductId = generateNextProductId(responseData.products);
         setInitialValues({
           productId: nextProductId,
@@ -227,6 +225,7 @@ const UseProductForm = (props) => {
     successAdd,
     handleClose,
     initialValues,
+    error
   };
 };
 

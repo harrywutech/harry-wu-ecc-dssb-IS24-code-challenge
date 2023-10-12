@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Form, Input, Select } from "informed";
 import { Button, Alert, Modal } from "react-bootstrap";
 import useProductForm from "./hooks/useProductForm";
-import { NumberInput } from "./NumberInput";
 import "./ProductForm.css";
 
 const ProductForm = (props) => {

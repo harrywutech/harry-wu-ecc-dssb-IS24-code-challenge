@@ -91,7 +91,7 @@ const ProductItemPage = () => {
                   to={`/products/update/${productItem.productId}`}
                   style={{ marginRight: "10px" }}
                 >
-                  <Button disabled={isLoading}>{"Update"}</Button>
+                  <Button disabled={isLoading}>{"Save"}</Button>
                 </Link>
                 <Button
                   variant="primary"
