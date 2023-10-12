@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Select, TextArea } from "informed";
+import { Form, Input, Select } from "informed";
 import { Button, Alert, Modal } from "react-bootstrap";
 import useProductForm from "./hooks/useProductForm";
 import { NumberInput } from "./NumberInput";

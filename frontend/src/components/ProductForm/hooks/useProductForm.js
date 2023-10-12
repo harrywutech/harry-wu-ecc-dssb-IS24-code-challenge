@@ -127,7 +127,7 @@ const UseProductForm = (props) => {
     };
 
     addProduct();
-  }, [addFormState]);
+  }, [addFormState, setAddFormState, history]);
 
   //update product
   useEffect(() => {
@@ -183,7 +183,7 @@ const UseProductForm = (props) => {
     };
 
     updateProduct();
-  }, [updateFormState]);
+  }, [updateFormState, setAddFormState, history, updateProductId]);
 
   return {
     isLoading,

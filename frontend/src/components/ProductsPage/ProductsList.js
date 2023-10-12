@@ -61,7 +61,7 @@ const ProductsList = (props) => {
               <td>{product.startDate}</td>
               <td>{product.methodology}</td>
               <td>
-                <a href={product.location} target="_blank">
+                <a href={product.location}>
                   {product.location}
                 </a>
               </td>

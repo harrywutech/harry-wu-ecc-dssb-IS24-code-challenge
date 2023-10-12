@@ -8,8 +8,7 @@ import {
   Card,
   ListGroup,
   ListGroupItem,
-  Spinner,
-  Modal,
+  Spinner
 } from "react-bootstrap";
 
 const ProductItemPage = () => {
@@ -77,7 +76,7 @@ const ProductItemPage = () => {
                   </ListGroupItem>
                   <ListGroupItem>
                     <b>{"Location: "}</b>
-                    <a href={productItem.location} target="_blank">{productItem.location}</a>
+                    <a href={productItem.location}>{productItem.location}</a>
                   </ListGroupItem>
                 </ListGroup>
               </Card.Body>
